@@ -35,7 +35,7 @@ export interface ProfileProps {
 export interface PromptCardProps {
   post: any
   handleTagClick?: (tag: string) => void 
-  handleEdit: () => void
-  handleDelete: () => void
+  handleEdit?: () => void
+  handleDelete?: () => void
 }
 

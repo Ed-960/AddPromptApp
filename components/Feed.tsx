@@ -10,8 +10,8 @@ const PromptCardList = ({ data, handleTagClick }: { data: any, handleTagClick: a
         <PromptCard 
           key={post._id}
           post={post}
-          handleTagClick={handleTagClick}  
-      />
+          handleTagClick={handleTagClick} 
+        />
       ))}
     </div>
   )
