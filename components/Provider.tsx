@@ -3,7 +3,7 @@
 import { ProviderProps } from '@interfaces/interfaces';
 import { SessionProvider } from 'next-auth/react';
 
-const Provider = ({ children, session }: ProviderProps) =>  (
+const Provider: React.FC<ProviderProps> = ({ children, session }) =>  (
     <div>
       <SessionProvider session={session}>
         {children}

@@ -4,16 +4,17 @@ import { useState, useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import Profile from '@components/Profile';
+import { Post, PostP, SessionUser } from '@interfaces/interfaces';
 
-const MyProfile = () => {
+const MyProfile: React.FC = () => {
   const router = useRouter();
   const { data: session } = useSession();
-  const user: any = session?.user;
-  const [posts, setPosts] = useState([]);
+  const user: SessionUser | undefined = session?.user;
+  const [posts, setPosts] = useState<Post[]>([]);
   
   useEffect(() => {
     const fetchPosts = async () => {
-      const response = await fetch(`/api/users/${user.id}/posts`);
+      const response = await fetch(`/api/users/${user?.id}/posts`);
       const data = await response.json();
   
       setPosts(data);
@@ -21,20 +22,21 @@ const MyProfile = () => {
     if(user?.id) fetchPosts();
   }, [user?.id]);
 
-  const handleEdit = async (post: any) => {
+  const handleEdit = async (post: Post) => {
     router.push(`/update-prompt?id=${post._id}`)
   }
 
-  const handleRemove = async (post: any) => {
+  const handleRemove = async (post: Post) => {
      const hasConfirmed = confirm('are you sure you want to delete this prompt');
   
       if(hasConfirmed) {
         try {
-          await fetch(`/api/prompt/${post._id.toString()}`, {
-            method: 'DELETE'
-          }) 
-
-          const filteredPosts = posts.filter((p: any) => p.id !== post._id)
+          if (post?._id) {
+            await fetch(`/api/prompt/${post._id.toString()}`, {
+              method: 'DELETE'
+            }) 
+          }
+          const filteredPosts = posts.filter((p: PostP) => p.id !== post._id)
           setPosts(filteredPosts);
         } catch (error) {
           console.log(error);

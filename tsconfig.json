@@ -23,6 +23,6 @@
       "@*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/database.js", "app/api/auth/[...nextauth]/route.js", "app/layout.js", "components/Nav.tsx", "components/Feed.jsx", "components/PromptCard.tsx", "app/update-prompt/page.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "utils/database.js", "app/api/auth/[...nextauth]/route.js", "app/layout.tsx", "components/Nav.tsx", "components/Feed.jsx", "components/PromptCard.tsx", "app/update-prompt/page.tsx"],
   "exclude": ["node_modules"]
 }

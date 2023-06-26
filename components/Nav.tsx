@@ -6,9 +6,8 @@
   import { signIn, signOut, getProviders, useSession } from 'next-auth/react';
   import { Provider } from '@interfaces/interfaces';
 
-  const Nav = () => {  
+  const Nav: React.FC = () => {  
     const { data: session } = useSession();
-    const user: any = session?.user;
     const [providers, setProviders] = useState<Record<string, Provider> | null>(null);
     const [toggleDropdown, setToggleDropdown] = useState<boolean>(false);
     useEffect(() => {
@@ -42,7 +41,9 @@
                 Sign Out
               </button>
               <Link href="/profile">
-                <Image src={user.image} width={37} height={37} className="rounded-full" alt='profile'/>
+                {session?.user.image && (
+                  <Image src={session?.user.image} width={37} height={37} className="rounded-full" alt='profile'/>
+                )}
               </Link>
             </div>
           ) : (
@@ -66,14 +67,16 @@
         <div className="sm:hidden flex relative">
             {session?.user ? (
               <div className="flex">
-                <Image 
-                  src={user.image}
-                  alt='profile'
-                  width={37}
-                  height={37}
-                  className="rounded-full"
-                  onClick={() => setToggleDropdown((prev) => !prev)}  
-                />
+                {session?.user.image && (
+                  <Image 
+                    src={session?.user.image}
+                    alt='profile'
+                    width={37}
+                    height={37}
+                    className="rounded-full"
+                    onClick={() => setToggleDropdown((prev) => !prev)}  
+                  />
+                )}
                 {toggleDropdown && (
                   <div className="dropdown">
                     <Link href='/profile' className="dropdown_link" onClick={() => setToggleDropdown(false)}>

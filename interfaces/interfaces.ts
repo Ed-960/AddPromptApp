@@ -8,10 +8,17 @@ export interface Provider {
 
 export interface ProviderProps {
   children: ReactNode;
-  session: Session | null;
+  session?: Session | null;
 }
 
 export interface Post {
+  _id?: string | null | undefined
+  prompt: string;
+  tag: string;
+};
+
+export interface PostP {
+  id?: string | null | undefined;
   prompt: string;
   tag: string;
 };
@@ -25,11 +32,11 @@ export interface FormProps {
 }
 
 export interface ProfileProps {
-  name: string
+  name: string | null
   desc: string
   data: Post[];
-  handleEdit: (post: Post) => void
-  handleDelete: (post: Post) => void
+  handleEdit?: (post: Post) => void
+  handleDelete?: (post: Post) => void
 }
 
 export interface PromptCardProps {
@@ -39,3 +46,33 @@ export interface PromptCardProps {
   handleDelete?: () => void
 }
 
+export interface Prompt {
+  _id: string
+  creator: {
+    username: string
+  }
+  tag: string
+  prompt: string
+}
+
+export interface PromptCardListProps {
+  data: Prompt[];
+  handleTagClick: (tagName: string) => void;
+}
+
+export interface SessionUser {
+  id?: string ;
+  name?: string | null | undefined;
+  email?: string | null | undefined;
+  image?: string | null | undefined;
+}
+
+export interface RootLayoutProps {
+  children: ReactNode;
+}
+
+export interface UserProfileProps {
+  params: {
+    id?: string;
+  };
+}

@@ -2,16 +2,16 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-
 import Form from "@components/Form";
+import { Post } from "@interfaces/interfaces";
 
-const EditPrompt = () => {
+const EditPrompt: React.FC = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
   const promptId = searchParams.get('id');
   
-  const [submitting, setIsSubmitting] = useState(false);
-  const [post, setPost] = useState({ prompt: "", tag: "" });
+  const [submitting, setIsSubmitting] = useState<boolean>(false);
+  const [post, setPost] = useState<Post>({ prompt: "", tag: "" });
 
   useEffect(() => {
     const getPromptDetails = async () => {
@@ -25,7 +25,7 @@ const EditPrompt = () => {
     if(promptId) getPromptDetails();
   }, [promptId])
 
-  const updatePrompt = async (e) => {
+  const updatePrompt = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
